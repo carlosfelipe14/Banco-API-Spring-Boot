@@ -13,6 +13,8 @@ public class ClienteDTO {
     private Date fechaNacimiento;
     private Genero genero;
 
+    public ClienteDTO() {}
+
     public ClienteDTO(String uuid, String nombre, String primerApellido, String segundoApellido, TipoDoc tipoDocumento,
             String numeroDocumento, Date fechaNacimiento, Genero genero) {
         this.uuid = uuid;

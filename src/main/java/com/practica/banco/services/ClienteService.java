@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.practica.banco.dtos.ClienteDTO;
 import com.practica.banco.dtos.ClienteMapper;
+import com.practica.banco.models.Cliente;
 import com.practica.banco.repositories.ClienteRepository;
 
 @Component
@@ -24,5 +25,10 @@ public class ClienteService {
                                 .stream()
                                 .map(cliente -> clienteMapper.toDTO(cliente))
                                 .collect(Collectors.toList());
+    }
+
+    public ClienteDTO save(ClienteDTO clienteDto) {
+        Cliente cliente = clienteMapper.toModel(clienteDto);
+        return clienteMapper.toDTO(clienteRepository.save(cliente));
     }
 }

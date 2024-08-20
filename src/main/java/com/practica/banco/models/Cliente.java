@@ -9,10 +9,12 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Entity(name = "clientes")
 public class Cliente {
@@ -121,6 +123,11 @@ public class Cliente {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    @PrePersist
+    public void initializeUuid(){
+        this.setUuid(UUID.randomUUID().toString());
     }
 
 }
