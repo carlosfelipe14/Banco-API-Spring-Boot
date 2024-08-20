@@ -20,6 +20,8 @@ public class Clientes {
     @Id
     @GeneratedValue
     private int id;
+    @Column(updatable = false, nullable = false, unique = true, length = 36)
+    private String uuid;
     @Column(length = 100)
     private String nombre;
     @Column(length = 50)
