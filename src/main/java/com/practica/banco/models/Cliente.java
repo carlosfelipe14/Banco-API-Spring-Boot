@@ -14,7 +14,7 @@ import jakarta.persistence.TemporalType;
 
 import java.util.Date;
 
-@Entity
+@Entity(name = "clientes")
 public class Cliente {
     
     @Id
@@ -113,6 +113,14 @@ public class Cliente {
 
     public void setGenero(Genero genero) {
         this.genero = genero;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
 }
