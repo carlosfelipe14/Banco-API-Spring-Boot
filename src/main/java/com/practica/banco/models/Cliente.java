@@ -15,7 +15,7 @@ import jakarta.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
-public class Clientes {
+public class Cliente {
     
     @Id
     @GeneratedValue
@@ -37,9 +37,9 @@ public class Clientes {
     @Enumerated(EnumType.ORDINAL)
     private Genero genero;
 
-    public Clientes() {}
+    public Cliente() {}
 
-    public Clientes(int id, String nombre, String primerApellido, String segundoApellido, TipoDoc tipoDocumento,
+    public Cliente(int id, String nombre, String primerApellido, String segundoApellido, TipoDoc tipoDocumento,
             String numeroDocumento, Date fechaNacimiento, Genero genero) {
         this.id = id;
         this.nombre = nombre;
