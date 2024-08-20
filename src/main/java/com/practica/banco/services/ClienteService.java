@@ -31,4 +31,10 @@ public class ClienteService {
         Cliente cliente = clienteMapper.toModel(clienteDto);
         return clienteMapper.toDTO(clienteRepository.save(cliente));
     }
+
+    public ClienteDTO getOne(String uuid) {
+        Cliente cliente = clienteRepository.findByUuid(uuid);
+        return clienteMapper.toDTO(cliente);
+    }
+
 }
