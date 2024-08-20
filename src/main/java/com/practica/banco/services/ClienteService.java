@@ -1,26 +1,28 @@
 package com.practica.banco.services;
 
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.practica.banco.dtos.ClienteDTO;
-import com.practica.banco.dtos.Genero;
-import com.practica.banco.dtos.TipoDoc;
+import com.practica.banco.dtos.ClienteMapper;
+import com.practica.banco.repositories.ClienteRepository;
 
 @Component
 public class ClienteService {
 
+    @Autowired
+    private ClienteMapper clienteMapper;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     public List<ClienteDTO> getAll() {
-        return Collections.singletonList(new ClienteDTO(UUID.randomUUID().toString(), 
-                    "Luis", "Perez", null, 
-                    TipoDoc.CI, "6543210", 
-                    new GregorianCalendar(1995, Calendar.NOVEMBER, 5).getTime(), 
-                    Genero.HOMBRE));
+        return clienteRepository.findAll()
+                                .stream()
+                                .map(cliente -> clienteMapper.toDTO(cliente))
+                                .collect(Collectors.toList());
     }
 }
