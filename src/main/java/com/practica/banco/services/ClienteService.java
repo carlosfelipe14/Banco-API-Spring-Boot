@@ -41,4 +41,22 @@ public class ClienteService {
         return clienteMapper.toDTO(cliente);
     }
 
+    public ClienteDTO update(String uuid, ClienteDTO clienteDTO) {
+        Cliente cliente = clienteRepository.findByUuid(uuid);
+
+        if(cliente == null)
+            throw new NotFoundException("Cliente", uuid);
+
+        cliente.setNombre(clienteDTO.getNombre());
+        cliente.setPrimerApellido(clienteDTO.getPrimerApellido());
+        cliente.setSegundoApellido(clienteDTO.getSegundoApellido());
+        cliente.setTipoDocumento(clienteDTO.getTipoDocumento());
+        cliente.setNumeroDocumento(clienteDTO.getNumeroDocumento());
+        cliente.setFechaNacimiento(clienteDTO.getFechaNacimiento());
+        cliente.setGenero(clienteDTO.getGenero());
+
+        clienteRepository.save(cliente);
+        return clienteMapper.toDTO(cliente);
+    }
+
 }
