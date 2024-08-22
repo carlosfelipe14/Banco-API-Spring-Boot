@@ -59,4 +59,14 @@ public class ClienteService {
         return clienteMapper.toDTO(cliente);
     }
 
+    public ClienteDTO delete(String uuid) {
+        Cliente cliente = clienteRepository.findByUuid(uuid);
+
+        if(cliente == null)
+            throw new NotFoundException("Cliente", uuid);
+
+        clienteRepository.delete(cliente);
+        return clienteMapper.toDTO(cliente);
+    }
+
 }
