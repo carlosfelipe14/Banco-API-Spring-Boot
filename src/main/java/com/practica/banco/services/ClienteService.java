@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.practica.banco.dtos.ClienteDTO;
 import com.practica.banco.dtos.ClienteMapper;
+import com.practica.banco.exceptions.NotFoundException;
 import com.practica.banco.models.Cliente;
 import com.practica.banco.repositories.ClienteRepository;
 
@@ -34,6 +34,10 @@ public class ClienteService {
 
     public ClienteDTO getOne(String uuid) {
         Cliente cliente = clienteRepository.findByUuid(uuid);
+
+        if(cliente == null)
+            throw new NotFoundException("Cliente", uuid);
+
         return clienteMapper.toDTO(cliente);
     }
 
