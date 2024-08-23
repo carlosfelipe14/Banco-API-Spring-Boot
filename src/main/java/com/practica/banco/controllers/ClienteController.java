@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.practica.banco.dtos.ClienteDTO;
 import com.practica.banco.services.ClienteService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -30,7 +32,7 @@ public class ClienteController {
     }
 
     @PostMapping()
-    public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO cliente) {
+    public ResponseEntity<ClienteDTO> create(@Valid @RequestBody ClienteDTO cliente) {
         return new ResponseEntity<>(clienteService.save(cliente), HttpStatus.CREATED);
     }
 
