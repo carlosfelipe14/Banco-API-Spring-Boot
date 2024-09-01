@@ -2,6 +2,8 @@ package com.practica.banco.dtos;
 
 import java.util.Date;
 
+import com.practica.banco.validation.ValidTipoDoc;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
@@ -19,6 +21,7 @@ public class ClienteDTO {
     @Size(min = 2, max = 50)
     private String segundoApellido;
     @NotNull
+    @ValidTipoDoc
     private TipoDoc tipoDocumento;
     @Pattern(regexp = "^[0-9]+(\\-[0-9]+)*$", message = "Quantity must be a numeric value")
     private String numeroDocumento;
