@@ -9,11 +9,13 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "clientes")
@@ -38,6 +40,9 @@ public class Cliente {
     private Date fechaNacimiento;
     @Enumerated(EnumType.ORDINAL)
     private Genero genero;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Cuenta> cuentas;
 
     public Cliente() {}
 
@@ -130,4 +135,7 @@ public class Cliente {
         this.setUuid(UUID.randomUUID().toString());
     }
 
+    public List<Cuenta> getCuentas() {
+        return cuentas;
+    }
 }

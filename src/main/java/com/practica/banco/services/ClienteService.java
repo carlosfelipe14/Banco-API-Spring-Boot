@@ -1,9 +1,6 @@
 package com.practica.banco.services;
 
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +8,10 @@ import org.springframework.stereotype.Component;
 import com.practica.banco.dtos.ClienteDTO;
 import com.practica.banco.dtos.ClienteMapper;
 import com.practica.banco.dtos.CuentaDTO;
-import com.practica.banco.dtos.Moneda;
-import com.practica.banco.dtos.SucursalBancaria;
-import com.practica.banco.dtos.TipoProducto;
+import com.practica.banco.dtos.CuentaMapper;
 import com.practica.banco.exceptions.NotFoundException;
 import com.practica.banco.models.Cliente;
+import com.practica.banco.models.Cuenta;
 import com.practica.banco.repositories.ClienteRepository;
 
 @Component
@@ -23,6 +19,9 @@ public class ClienteService {
 
     @Autowired
     private ClienteMapper clienteMapper;
+
+    @Autowired
+    private CuentaMapper cuentaMapper;
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -79,18 +78,14 @@ public class ClienteService {
     public List<CuentaDTO> getCuentas(String uuid) {
         Cliente cliente = clienteRepository.findByUuid(uuid);
 
-        CuentaDTO cuentaDto = new CuentaDTO();
-        cuentaDto.setUuid(UUID.randomUUID().toString());
-        cuentaDto.setTipoProducto(TipoProducto.CAJA_AHORRO);
-        cuentaDto.setNumeroCuenta("1234567890");
-        cuentaDto.setMoneda(Moneda.BS);
-        cuentaDto.setMonto(1000.0);
-        cuentaDto.setFechaApertura(new Date());
-        cuentaDto.setSucursal(SucursalBancaria.LA_PAZ);
+        if(cliente == null)
+            throw new NotFoundException("Cliente", uuid);
 
-        cuentaDto.setCliente(clienteMapper.toDTO(cliente));
+        List<Cuenta> cuentas = cliente.getCuentas();
 
-        return Collections.singletonList(cuentaDto);
+        return cuentas.stream()
+                     .map(cuenta -> cuentaMapper.toDTO(cuenta))
+                     .collect(Collectors.toList());
     }
 
 }
