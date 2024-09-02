@@ -10,5 +10,5 @@ insert into
     cuentas (id, cliente_id, uuid, tipo_producto, numero_cuenta, moneda, sucursal, fecha_apertura)
     values(2001, 1002, '54736e68-cc7f-4449-887c-2cb3efec6977', 'CAJA_AHORRO', '1111000011', 'BS', 'COCHABAMBA', '2010-10-10');
 insert into
-    cuentas (id, cliente_id, uuid, tipo_producto, numero_cuenta, moneda, sucursal, fecha_apertura)
-    values(2002, 1002, '23436e68-cc7f-4449-887c-2cb3efecabc8', 'CAJA_AHORRO', '1111000012', 'USD', 'COCHABAMBA', '2010-10-10');
+    cuentas (id, cliente_id, uuid, tipo_producto, numero_cuenta, moneda, sucursal)
+    values(2002, 1002, '23436e68-cc7f-4449-887c-2cb3efecabc8', 'CAJA_AHORRO', '1111000012', 'USD', 'COCHABAMBA');
