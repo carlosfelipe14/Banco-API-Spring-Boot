@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.practica.banco.dtos.CuentaDTO;
 import com.practica.banco.services.CuentaService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/cuentas")
 public class CuentaController {
@@ -25,7 +27,7 @@ public class CuentaController {
   }
 
   @PutMapping("/{cuuid}")
-  public CuentaDTO update(@PathVariable("cuuid") String uuid, @RequestBody CuentaDTO cuentaDTO) {
+  public CuentaDTO update(@PathVariable("cuuid") String uuid, @Valid @RequestBody CuentaDTO cuentaDTO) {
     return cuentaService.update(uuid, cuentaDTO);
   }
 

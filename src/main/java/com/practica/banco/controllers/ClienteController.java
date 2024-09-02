@@ -58,7 +58,7 @@ public class ClienteController {
     }
     
     @PostMapping("/{cluuid}/cuentas")
-    public ResponseEntity<CuentaDTO> createCuenta(@PathVariable("cluuid") String uuid, @RequestBody CuentaDTO cuenta) {
+    public ResponseEntity<CuentaDTO> createCuenta(@PathVariable("cluuid") String uuid, @Valid @RequestBody CuentaDTO cuenta) {
         return new ResponseEntity<>(clienteService.createCuenta(uuid, cuenta), HttpStatus.CREATED);
     }
 }

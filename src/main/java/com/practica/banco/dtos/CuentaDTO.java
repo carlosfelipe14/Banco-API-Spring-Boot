@@ -2,14 +2,26 @@ package com.practica.banco.dtos;
 
 import java.util.Date;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
+
 public class CuentaDTO {
   
   private String uuid;
+  @NotNull
   private TipoProducto tipoProducto;
+  @NotNull
+  @Pattern(regexp = "^[0-9]{10}$", message = "must be 10 dígits")
   private String numeroCuenta;
+  @NotNull
   private Moneda moneda;
+  @NotNull
   private Double monto;
+  @NotNull
+  @PastOrPresent
   private Date fechaApertura;
+  @NotNull
   private SucursalBancaria sucursal;
 
   private ClienteDTO cliente;
