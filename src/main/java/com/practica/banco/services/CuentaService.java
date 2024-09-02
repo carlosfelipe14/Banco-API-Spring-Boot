@@ -24,7 +24,7 @@ public class CuentaService {
     if(cuenta == null)
       throw new NotFoundException("Cuenta", uuid);
 
-    return cuentaMapper.toDTO(cuenta);
+    return cuentaMapper.toDTO(cuenta, true);
   }
 
   public CuentaDTO update(String uuid, CuentaDTO cuentaDTO) {
@@ -37,7 +37,7 @@ public class CuentaService {
     cuenta.setMoneda(cuentaDTO.getMoneda());
     cuenta.setSucursal(cuentaDTO.getSucursal());
 
-    return cuentaMapper.toDTO(cuentaRepository.save(cuenta));
+    return cuentaMapper.toDTO(cuentaRepository.save(cuenta), true);
   }
 
   public CuentaDTO delete(String uuid) {
@@ -48,7 +48,7 @@ public class CuentaService {
 
     cuentaRepository.delete(cuenta);
 
-    return cuentaMapper.toDTO(cuenta);
+    return cuentaMapper.toDTO(cuenta, true);
   }
 
 }

@@ -88,7 +88,7 @@ public class ClienteService {
         List<Cuenta> cuentas = cliente.getCuentas();
 
         return cuentas.stream()
-                     .map(cuenta -> cuentaMapper.toDTO(cuenta))
+                     .map(cuenta -> cuentaMapper.toDTO(cuenta, false))
                      .collect(Collectors.toList());
     }
 
@@ -102,7 +102,7 @@ public class ClienteService {
         
         cuentaRepository.save(cuentaModel);
 
-        return cuentaMapper.toDTO(cuentaModel);
+        return cuentaMapper.toDTO(cuentaModel, false);
     }
 
 }

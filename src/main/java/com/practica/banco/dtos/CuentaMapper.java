@@ -12,7 +12,7 @@ public class CuentaMapper {
   @Autowired
   private ClienteMapper clienteMapper;
 
-  public CuentaDTO toDTO(Cuenta cuenta) {
+  public CuentaDTO toDTO(Cuenta cuenta, boolean withClienteModel) {
     CuentaDTO cuentaDTO = new CuentaDTO(
         cuenta.getUuid(),
         cuenta.getTipoProducto(),
@@ -21,8 +21,11 @@ public class CuentaMapper {
         cuenta.getMonto(),
         cuenta.getFechaApertura(),
         cuenta.getSucursal());
-    cuentaDTO.setCliente(clienteMapper.toDTO(cuenta.getCliente()));
-    return cuentaDTO;
+
+    if (withClienteModel)
+      cuentaDTO.setCliente(clienteMapper.toDTO(cuenta.getCliente()));
+  
+      return cuentaDTO;
   }
 
   public Cuenta toModel(CuentaDTO cuentaDTO, Cliente cliente) {
