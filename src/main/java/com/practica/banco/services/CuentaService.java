@@ -40,4 +40,15 @@ public class CuentaService {
     return cuentaMapper.toDTO(cuentaRepository.save(cuenta));
   }
 
+  public CuentaDTO delete(String uuid) {
+    Cuenta cuenta = cuentaRepository.findByUuid(uuid);
+
+    if(cuenta == null)
+      throw new NotFoundException("Cuenta", uuid);
+
+    cuentaRepository.delete(cuenta);
+
+    return cuentaMapper.toDTO(cuenta);
+  }
+
 }

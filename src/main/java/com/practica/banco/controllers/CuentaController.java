@@ -1,6 +1,7 @@
 package com.practica.banco.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,6 +27,11 @@ public class CuentaController {
   @PutMapping("/{cuuid}")
   public CuentaDTO update(@PathVariable("cuuid") String uuid, @RequestBody CuentaDTO cuentaDTO) {
     return cuentaService.update(uuid, cuentaDTO);
+  }
+
+  @DeleteMapping("/{cuuid}")
+  public CuentaDTO delete(@PathVariable("cuuid") String uuid) {
+    return cuentaService.delete(uuid);
   }
 
 }
