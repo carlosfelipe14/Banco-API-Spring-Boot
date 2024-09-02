@@ -3,6 +3,8 @@ package com.practica.banco.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +21,11 @@ public class CuentaController {
   @GetMapping("/{cuuid}")
   public CuentaDTO getOne(@PathVariable("cuuid") String uuid) {
     return cuentaService.getOne(uuid);
+  }
+
+  @PutMapping("/{cuuid}")
+  public CuentaDTO update(@PathVariable("cuuid") String uuid, @RequestBody CuentaDTO cuentaDTO) {
+    return cuentaService.update(uuid, cuentaDTO);
   }
 
 }

@@ -27,4 +27,17 @@ public class CuentaService {
     return cuentaMapper.toDTO(cuenta);
   }
 
+  public CuentaDTO update(String uuid, CuentaDTO cuentaDTO) {
+    Cuenta cuenta = cuentaRepository.findByUuid(uuid);
+
+    if(cuenta == null)
+      throw new NotFoundException("Cuenta", uuid);
+
+    cuenta.setMonto(cuentaDTO.getMonto());
+    cuenta.setMoneda(cuentaDTO.getMoneda());
+    cuenta.setSucursal(cuentaDTO.getSucursal());
+
+    return cuentaMapper.toDTO(cuentaRepository.save(cuenta));
+  }
+
 }

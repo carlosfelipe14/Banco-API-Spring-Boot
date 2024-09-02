@@ -27,15 +27,16 @@ public class Cuenta {
   @Column(updatable = false, nullable = false, unique = true, length = 36)
   private String uuid;
   @Enumerated(EnumType.STRING)
+  @Column(updatable = false, nullable = false)
   private TipoProducto tipoProducto;
-  @Column(length = 10)
+  @Column(length = 10, updatable = false, nullable = false, unique = true)
   private String numeroCuenta;
   @Enumerated(EnumType.STRING)
   private Moneda moneda;
   @Column(columnDefinition = "DECIMAL(10,2) NOT NULL DEFAULT 0.0")
   private Double monto;
   @Temporal(TemporalType.DATE)
-  @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
+  @Column(updatable = false, nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
   private Date fechaApertura;
   @Enumerated(EnumType.STRING)
   private SucursalBancaria sucursal;
