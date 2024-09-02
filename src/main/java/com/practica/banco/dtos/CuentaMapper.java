@@ -3,6 +3,7 @@ package com.practica.banco.dtos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.practica.banco.models.Cliente;
 import com.practica.banco.models.Cuenta;
 
 @Component
@@ -24,7 +25,7 @@ public class CuentaMapper {
     return cuentaDTO;
   }
 
-  public Cuenta toModel(CuentaDTO cuentaDTO) {
+  public Cuenta toModel(CuentaDTO cuentaDTO, Cliente cliente) {
     Cuenta cuenta = new Cuenta();
     cuenta.setUuid(cuentaDTO.getUuid());
     cuenta.setTipoProducto(cuentaDTO.getTipoProducto());
@@ -33,6 +34,8 @@ public class CuentaMapper {
     cuenta.setMonto(cuentaDTO.getMonto());
     cuenta.setFechaApertura(cuentaDTO.getFechaApertura());
     cuenta.setSucursal(cuentaDTO.getSucursal());
+
+    cuenta.setCliente(cliente);
     return cuenta;
   }
 

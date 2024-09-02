@@ -13,6 +13,7 @@ import com.practica.banco.exceptions.NotFoundException;
 import com.practica.banco.models.Cliente;
 import com.practica.banco.models.Cuenta;
 import com.practica.banco.repositories.ClienteRepository;
+import com.practica.banco.repositories.CuentaRepository;
 
 @Component
 public class ClienteService {
@@ -25,6 +26,9 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private CuentaRepository cuentaRepository;
 
     public List<ClienteDTO> getAll() {
         return clienteRepository.findAll()
@@ -86,6 +90,19 @@ public class ClienteService {
         return cuentas.stream()
                      .map(cuenta -> cuentaMapper.toDTO(cuenta))
                      .collect(Collectors.toList());
+    }
+
+    public CuentaDTO createCuenta(String uuid, CuentaDTO cuenta) {
+        Cliente cliente = clienteRepository.findByUuid(uuid);
+
+        if(cliente == null)
+            throw new NotFoundException("Cliente", uuid);
+
+        Cuenta cuentaModel = cuentaMapper.toModel(cuenta, cliente);
+        
+        cuentaRepository.save(cuentaModel);
+
+        return cuentaMapper.toDTO(cuentaModel);
     }
 
 }
