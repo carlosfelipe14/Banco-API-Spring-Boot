@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.practica.banco.dtos.ClienteDTO;
+import com.practica.banco.dtos.CuentaDTO;
 import com.practica.banco.services.ClienteService;
 
 import jakarta.validation.Valid;
@@ -42,7 +43,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{cluuid}")
-    public ClienteDTO update(@PathVariable("cluuid") String uuid, @RequestBody ClienteDTO clienteDTO) {
+    public ClienteDTO update(@PathVariable("cluuid") String uuid, @Valid @RequestBody ClienteDTO clienteDTO) {
         return clienteService.update(uuid, clienteDTO);
     }
 
@@ -50,4 +51,10 @@ public class ClienteController {
     public ClienteDTO delete(@PathVariable("cluuid") String uuid) {
         return clienteService.delete(uuid);
     }
+
+    @GetMapping("/{cluuid}/cuentas")
+    public List<CuentaDTO> getCuentas(@PathVariable("cluuid") String uuid) {
+        return clienteService.getCuentas(uuid);
+    }
+    
 }
