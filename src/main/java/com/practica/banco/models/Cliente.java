@@ -3,6 +3,7 @@ package com.practica.banco.models;
 import com.practica.banco.dtos.Genero;
 import com.practica.banco.dtos.TipoDoc;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -41,7 +42,7 @@ public class Cliente {
     @Enumerated(EnumType.ORDINAL)
     private Genero genero;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
     private List<Cuenta> cuentas;
 
     public Cliente() {}
