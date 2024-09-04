@@ -6,6 +6,7 @@ import com.practica.banco.dtos.TipoDoc;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +20,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 @Entity(name = "clientes")
+@EntityListeners(AuditingEntityListener.class)
 public class Cliente {
     
     @Id
@@ -44,6 +50,13 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
     private List<Cuenta> cuentas;
+
+    @CreatedDate
+    @Column(updatable = false, columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP")
+    private Date createdDate;
+    @LastModifiedDate
+    @Column(updatable = true, columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP")
+    private Date modifiedDate;
 
     public Cliente() {}
 

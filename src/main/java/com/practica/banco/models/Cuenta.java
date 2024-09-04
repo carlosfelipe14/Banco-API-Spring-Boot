@@ -2,12 +2,17 @@ package com.practica.banco.models;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import com.practica.banco.dtos.Moneda;
 import com.practica.banco.dtos.SucursalBancaria;
 import com.practica.banco.dtos.TipoProducto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
@@ -19,6 +24,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity(name = "cuentas")
+@EntityListeners(AuditingEntityListener.class)
 public class Cuenta {
 
   @Id
@@ -43,6 +49,13 @@ public class Cuenta {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   private Cliente cliente;
+
+  @CreatedDate
+  @Column(updatable = false, columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP")
+  private Date createdDate;
+  @LastModifiedDate
+  @Column(updatable = true, columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP")
+  private Date modifiedDate;
 
   public Cuenta() {
   }
