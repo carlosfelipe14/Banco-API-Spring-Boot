@@ -1,0 +1,67 @@
+ENDPOINTS
+=========
+
+CLIENTES
+-----------------------------
+GET:/clientes
+
+response body:
+    [
+        {
+            uuid:
+            nombre:
+            ap_paterno:
+            ap_materno:
+            tipo_documento:
+            numero_documento:
+            fecha_nacimiento:
+            genero:
+            cuentas: []
+        },
+        { ... }
+    ]
+
+
+POST:/clientes
+
+request body
+    {
+        nombre:
+        ap_paterno:
+        ap_materno:
+        tipo_documento:
+        numero_documento:
+        fecha_nacimiento:
+        genero:
+    }
+
+response body
+    {
+        #cliente
+    }
+
+PUT:/clientes/{uuid}
+
+request body
+    {
+        uuid:
+        nombre:
+        ap_paterno:
+        ap_materno:
+        tipo_documento:
+        numero_documento:
+        fecha_nacimiento:
+        genero:
+    }
+
+response body
+    {
+        #cliente
+    }
+
+DELETE:/clientes/{uuid}
+
+response body
+    {
+        #cliente
+    }
